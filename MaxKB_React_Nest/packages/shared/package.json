@@ -1,0 +1,11 @@
+{
+	"name": "@maxkb/shared",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"build": "echo shared build",
+		"lint": "echo shared lint",
+		"typecheck": "echo shared typecheck"
+	}
+}
