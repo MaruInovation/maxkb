@@ -1,11 +1,11 @@
-import {fileURLToPath, URL} from 'node:url'
-import type {ProxyOptions} from 'vite'
-import {defineConfig, loadEnv} from 'vite'
+import { fileURLToPath, URL } from 'node:url'
+import type { ProxyOptions } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import path from 'path'
-import {createHtmlPlugin} from 'vite-plugin-html'
+import { createHtmlPlugin } from 'vite-plugin-html'
 import fs from 'fs'
 // import vueDevTools from 'vite-plugin-vue-devtools'
 const envDir = './env'
@@ -89,7 +89,7 @@ export default defineConfig((conf: any) => {
       vue(),
       vueJsx(),
       DefineOptions(),
-      createHtmlPlugin({template: ENV.VITE_ENTRY}),
+      createHtmlPlugin({ template: ENV.VITE_ENTRY }),
       renameHtmlPlugin(`dist${ENV.VITE_BASE_PATH}`, ENV.VITE_ENTRY),
     ],
     server: {

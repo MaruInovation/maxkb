@@ -2,8 +2,9 @@
 	"name": "maxkb_react",
 	"private": true,
 	"scripts": {
-		"dev": "concurrently -n client,server -c cyan,green \"bun run dev:client\" \"bun run dev:server\"",
+		"dev": "concurrently -n client,chat,server -c cyan,magenta,green \"bun run dev:client\" \"bun run dev:client:chat\" \"bun run dev:server\"",
 		"dev:client": "bun run --filter @maxkb/client dev",
+		"dev:client:chat": "bun run --filter @maxkb/client chat",
 		"dev:server": "bun run --filter @maxkb/server dev",
 		"build": "bun run --filter '*' build",
 		"lint": "bun run --filter '*' lint",
