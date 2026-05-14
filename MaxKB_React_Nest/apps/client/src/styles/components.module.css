@@ -1,0 +1,276 @@
+.editAvatar {
+	position: relative;
+	line-height: 0;
+}
+
+.editMask {
+	position: absolute;
+	left: 0;
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.dotting {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 10px;
+	min-height: 2px;
+	padding-right: 2px;
+	padding-left: 2px;
+	margin-left: 2px;
+	background-color: currentcolor;
+	background-clip: content-box;
+	border-right: 2px solid currentcolor;
+	border-left: 2px solid currentcolor;
+	animation: dot 0.8s infinite step-start both;
+}
+
+.dotting::before {
+	content: "";
+}
+
+@keyframes dot {
+	25% {
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	50% {
+		background-color: transparent;
+		border-right-color: transparent;
+	}
+
+	75% {
+		border-right-color: transparent;
+	}
+}
+
+.dotSuccess {
+	width: 8px;
+	height: 8px;
+	background-color: var(--app-success-color);
+	border-radius: 50%;
+}
+
+.cardCheckbox input[type="checkbox"] {
+	position: relative;
+	width: 14px;
+	height: 14px;
+	appearance: none;
+}
+
+.cardCheckbox input[type="checkbox"]::after {
+	position: absolute;
+	top: 0;
+	box-sizing: content-box;
+	width: 13px;
+	height: 13px;
+	color: #000000;
+	text-align: center;
+	visibility: visible;
+	content: "";
+	background-color: #ffffff;
+	border: 1px solid var(--app-border-color);
+	border-radius: var(--app-border-radius-small);
+}
+
+.cardCheckbox input[type="checkbox"]:checked::after {
+	color: #ffffff;
+	content: "✓";
+	background: var(--app-primary-color);
+	border-color: var(--app-primary-color);
+}
+
+.dragCard.noDrag .handleImg {
+	display: none;
+}
+
+.dragCard:not(.noDrag) .handleImg {
+	display: none;
+}
+
+.dragCard:not(.noDrag) .handle:hover .handleImg {
+	display: block;
+}
+
+.buttonNewTag {
+	padding: 5px 6px;
+	font-size: 14px;
+	color: var(--app-input-color-placeholder);
+	background: none;
+	border: 1px dashed var(--app-border-color);
+}
+
+.buttonNewTag:hover {
+	color: var(--app-input-color-placeholder);
+	background: var(--app-layout-bg-color);
+	border-color: var(--app-border-color);
+}
+
+.uploadDecoration {
+	font-size: 12px;
+	line-height: 20px;
+	color: var(--app-text-color-secondary);
+}
+
+.mulOperation {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 22;
+	box-sizing: border-box;
+	width: calc(100% - var(--sidebar-width));
+	padding: 16px 24px;
+	margin-left: var(--sidebar-width);
+	background: #ffffff;
+	box-shadow: 0 -2px 4px 0 rgba(31, 35, 41, 0.08);
+}
+
+.avatarGradient {
+	background: var(--app-avatar-gradient-color);
+}
+
+.avatarPurple {
+	background: #7f3bf5;
+}
+
+.avatarGreen {
+	background: var(--app-success-color);
+}
+
+.avatarBlue {
+	background: #3370ff;
+}
+
+.avatarOrange {
+	background: #ff8800;
+}
+
+.layoutBg {
+	background: var(--app-layout-bg-color);
+}
+
+.whiteBg {
+	background: #ffffff;
+}
+
+.titleDecoration {
+	position: relative;
+	padding-left: 12px;
+}
+
+.titleDecoration::before {
+	position: absolute;
+	top: 50%;
+	left: 2px;
+	width: 2px;
+	height: 80%;
+	content: "";
+	background: var(--app-primary-color);
+	transform: translate(-50%, -50%);
+}
+
+.defaultTag {
+	color: var(--app-primary-color);
+	background: rgba(51, 112, 255, 0.12);
+	border: none;
+}
+
+.dangerTag {
+	color: var(--tag-danger-color);
+	background: var(--tag-danger-bg);
+	border: none;
+}
+
+.successTag {
+	color: var(--tag-success-color);
+	background: var(--tag-success-bg);
+	border: none;
+}
+
+.warningTag {
+	color: var(--tag-warning-color);
+	background: var(--tag-warning-bg);
+	border: none;
+}
+
+.infoTag {
+	color: var(--app-text-color-secondary);
+	background: rgba(31, 35, 41, 0.1);
+	border: none;
+}
+
+.blueTag {
+	color: var(--tag-default-color);
+	background: var(--tag-default-bg);
+	border: none;
+}
+
+.updateInfo {
+	line-height: 25px;
+	background: #d6e2ff;
+}
+
+.cardNever {
+	background: var(--app-layout-bg-color);
+	border: none;
+}
+
+.arrowIcon {
+	transition: transform 0.2s ease-in-out;
+}
+
+.rotate90 {
+	transform: rotateZ(90deg);
+}
+
+.rotate180 {
+	transform: rotateZ(180deg);
+}
+
+.mainCalcHeight {
+	box-sizing: border-box;
+	height: var(--app-main-height);
+}
+
+.chatBackground {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.supPopover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	display: none;
+	width: 240px;
+	padding: 10px 12px;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #303133;
+	word-break: break-word;
+	background: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.supPopoverArrow {
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background: #ffffff;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08);
+	transform: rotate(45deg);
+}
+
+.selectModelIcon {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	object-fit: contain;
+}
+
+.customSelectPopper {
+	max-width: 100%;
+}

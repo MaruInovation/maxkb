@@ -1,0 +1,133 @@
+@font-face {
+	font-family: "AlibabaPuHuiTi";
+	src:
+		url("./font/AlibabaPuHuiTi-3-55-Regular.woff2") format("woff2"),
+		url("./font/AlibabaPuHuiTi-3-55-Regular.woff") format("woff"),
+		url("./font/AlibabaPuHuiTi-3-55-Regular.ttf") format("truetype"),
+		url("./font/AlibabaPuHuiTi-3-55-Regular.otf") format("opentype"),
+		url("./font/AlibabaPuHuiTi-3-55-Regular.eot") format("embedded-opentype");
+	font-display: swap;
+}
+
+:global(*),
+:global(*::before),
+:global(*::after) {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:global(html),
+:global(body),
+:global(#root) {
+	width: 100%;
+	min-width: 0;
+	height: 100%;
+}
+
+:global(html) {
+	font-size: 100%;
+}
+
+:global(body) {
+	color: var(--app-text-color-primary);
+	background: var(--app-layout-bg-color);
+	font-family:
+		"PingFang SC",
+		"AlibabaPuHuiTi",
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+:global(button),
+:global(input),
+:global(textarea),
+:global(select) {
+	font: inherit;
+}
+
+:global(button) {
+	cursor: pointer;
+}
+
+:global(button:disabled) {
+	cursor: not-allowed;
+}
+
+:global(:focus),
+:global(a:active),
+:global(div:focus) {
+	outline: none;
+}
+
+:global(a),
+:global(a:focus),
+:global(a:hover) {
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+:global(ul),
+:global(ol) {
+	list-style: none;
+}
+
+:global(pre) {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+:global(img),
+:global(svg),
+:global(video),
+:global(canvas) {
+	display: block;
+	max-width: 100%;
+}
+
+:global(::-webkit-scrollbar) {
+	width: 6px;
+	height: 6px;
+}
+
+:global(::-webkit-scrollbar-thumb) {
+	background: rgba(31, 35, 41, 0.2);
+	border-radius: 5px;
+}
+
+:global(::-webkit-scrollbar-track) {
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+:global(h1) {
+	font-size: 24px;
+}
+
+:global(h2) {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+:global(h3) {
+	font-size: 18px;
+}
+
+:global(h4) {
+	font-size: 16px;
+}
+
+:global(h5) {
+	font-size: 14px;
+	font-weight: 500;
+}
