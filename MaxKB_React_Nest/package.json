@@ -1,0 +1,22 @@
+{
+  "name": "maxkb_react",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n client,server -c cyan,green \"bun run dev:client\" \"bun run dev:server\"",
+    "dev:client": "bun run --filter @maxkb/client dev",
+    "dev:server": "bun run --filter @maxkb/server dev",
+    "build": "bun run --filter '*' build",
+    "lint": "bun run --filter '*' lint",
+    "typecheck": "bun run --filter '*' typecheck"
+  },
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest",
+    "concurrently": "^9.2.1",
+    "typescript": "^5"
+  }
+}
