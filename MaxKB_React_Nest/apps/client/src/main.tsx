@@ -1,12 +1,10 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import styles from "./styles/index.module.css";
-import App from "./App.tsx";
+import { AppRoot } from "@/app/AppRoot";
 
-createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<div className={styles.appRoot}>
-			<App />
-		</div>
-	</StrictMode>,
-);
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+	throw new Error("admin.html下的root节点未找到");
+}
+
+createRoot(rootElement).render(<AppRoot />);

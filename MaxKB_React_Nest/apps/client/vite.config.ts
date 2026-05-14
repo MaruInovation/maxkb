@@ -41,9 +41,7 @@ export default defineConfig((config: ConfigEnv) => {
 			outDir: `dist${env.VITE_BASE_PATH}`,
 			target: "es2022",
 			rollupOptions: {
-				input: {
-					[env.VITE_APP_NAME]: resolvePath(env.VITE_ENTRY),
-				},
+				input: env.VITE_ENTRY,
 			},
 		},
 		resolve: {

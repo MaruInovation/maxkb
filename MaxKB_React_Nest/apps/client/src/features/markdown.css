@@ -1,0 +1,37 @@
+.markdown-editor,
+.markdown-preview {
+	font-weight: 400;
+}
+
+.markdown-editor .w-md-editor,
+.markdown-preview .wmde-markdown {
+	color: var(--app-text-color-primary);
+	background: var(--app-view-bg-color);
+	border-radius: var(--app-border-radius-base);
+}
+
+.markdown-preview .wmde-markdown {
+	padding: 0;
+	font-size: inherit;
+	word-break: break-word;
+}
+
+.markdown-preview .wmde-markdown table {
+	display: block;
+}
+
+.markdown-preview .wmde-markdown p {
+	padding: 0;
+}
+
+.markdown-preview .wmde-markdown img,
+.markdown-preview .wmde-markdown video {
+	max-width: 360px;
+}
+
+@media only screen and (max-width: 768px) {
+	.markdown-preview .wmde-markdown img,
+	.markdown-preview .wmde-markdown video {
+		max-width: 100%;
+	}
+}
