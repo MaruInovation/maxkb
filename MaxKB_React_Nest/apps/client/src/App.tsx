@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MyButton } from "@/components/MyButton";
 import { MarkdownEditor } from "@/features/MarkdownEditor";
 import { MarkdownPreview } from "@/features/MarkdownPreview";
+import { Button } from 'antd';
 
 const initialMarkdown = `# MaxKB Markdown
 
@@ -23,6 +24,9 @@ export default function App() {
 		<main>
 			123123
 			<MyButton>公共按钮</MyButton>
+			<Button color="cyan" variant="solid">
+				Solid
+			</Button>
 			<MarkdownEditor value={markdown} onChange={setMarkdown} />
 			<MarkdownPreview source={markdown} />
 		</main>
