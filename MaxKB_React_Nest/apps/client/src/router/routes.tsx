@@ -1,5 +1,6 @@
 import type { RouteObject } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import AppSidelay from "@/layout/layout-template/AppSidelay";
 import { authGuardLoader } from "./guard";
 import { lazyRoute } from "./lazyRoute";
 
@@ -11,12 +12,9 @@ const moduleRoutes = Object.values(modules).map((module) => module.default);
 
 export const routes: RouteObject[] = [
 	{
-		path: "/login",
-		lazy: lazyRoute(() => import("@/views/login")),
-	},
-	{
 		path: "/",
 		loader: authGuardLoader,
+		element: <AppSidelay />,
 		children: [
 			{
 				index: true,
@@ -28,5 +26,9 @@ export const routes: RouteObject[] = [
 	{
 		path: "*",
 		lazy: lazyRoute(() => import("@/views/error/NotFound")),
+	},
+	{
+		path: "/login",
+		lazy: lazyRoute(() => import("@/views/login")),
 	},
 ];

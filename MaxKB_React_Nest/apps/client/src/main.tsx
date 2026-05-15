@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import "nprogress/nprogress.css";
 import { AppRoot } from "@/app/AppRoot";
 
 const rootElement = document.getElementById("root");

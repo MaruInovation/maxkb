@@ -24,6 +24,7 @@
         "i18next": "^26.1.0",
         "katex": "^0.16.46",
         "mermaid": "^11.15.0",
+        "nprogress": "^0.2.0",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
         "react-i18next": "^17.0.7",
@@ -39,6 +40,7 @@
         "@rolldown/plugin-babel": "^0.2.3",
         "@types/babel__core": "^7.20.5",
         "@types/node": "^24.12.3",
+        "@types/nprogress": "^0.2.3",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^6.0.1",
@@ -628,6 +630,8 @@
     "@types/ms": ["@types/ms@2.1.0", "https://registry.npmmirror.com/@types/ms/-/ms-2.1.0.tgz", {}, "sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA=="],
 
     "@types/node": ["@types/node@24.12.4", "https://registry.npmmirror.com/@types/node/-/node-24.12.4.tgz", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-GUUEShf+PBCGW2KaXwcIt3Yk+e3pkKwWKb9GSyM9WQVE+ep2jzmHdGsHzu4wgcZy5fN9FBdVzjpBQsYlpfpgLA=="],
+
+    "@types/nprogress": ["@types/nprogress@0.2.3", "https://registry.npmmirror.com/@types/nprogress/-/nprogress-0.2.3.tgz", {}, "sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA=="],
 
     "@types/prismjs": ["@types/prismjs@1.26.6", "https://registry.npmmirror.com/@types/prismjs/-/prismjs-1.26.6.tgz", {}, "sha512-vqlvI7qlMvcCBbVe0AKAb4f97//Hy0EBTaiW8AalRnG/xAN5zOiWWyrNqNXeq8+KAuvRewjCVY1+IPxk4RdNYw=="],
 
@@ -1714,6 +1718,8 @@
     "normalize-path": ["normalize-path@3.0.0", "https://registry.npmmirror.com/normalize-path/-/normalize-path-3.0.0.tgz", {}, "sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA=="],
 
     "npm-run-path": ["npm-run-path@4.0.1", "https://registry.npmmirror.com/npm-run-path/-/npm-run-path-4.0.1.tgz", { "dependencies": { "path-key": "^3.0.0" } }, "sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw=="],
+
+    "nprogress": ["nprogress@0.2.0", "https://registry.npmmirror.com/nprogress/-/nprogress-0.2.0.tgz", {}, "sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA=="],
 
     "nth-check": ["nth-check@2.1.1", "https://registry.npmmirror.com/nth-check/-/nth-check-2.1.1.tgz", { "dependencies": { "boolbase": "^1.0.0" } }, "sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w=="],
 
