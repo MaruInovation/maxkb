@@ -40,14 +40,14 @@ src/api     业务接口方法
 
 ```ts
 export const router = createBrowserRouter(routes, {
-	basename: "/admin",
+	basename: '/admin',
 });
 ```
 
 在非组件文件里不能使用 `useNavigate`，因为 hook 只能在 React 组件或自定义 hook 中运行。所以请求层需要导入路由实例，并调用：
 
 ```ts
-router.navigate("/login");
+router.navigate('/login');
 ```
 
 这样做的好处是：
@@ -73,7 +73,7 @@ const [loading, setLoading] = useState(false);
 所以 React 版请求包装接受的是 `setLoading`：
 
 ```ts
-promise(request.get("/application"), setLoading);
+promise(request.get('/application'), setLoading);
 ```
 
 为什么不在 `promise` 内部默认创建一个 loading 状态？因为工具函数不是 React 组件，它内部创建的普通变量或状态不会驱动任何页面重渲染。React 的工程思想是“状态属于使用它的组件”，请求工具只负责在开始和结束时通知外部。
@@ -81,7 +81,7 @@ promise(request.get("/application"), setLoading);
 当前实现同时保留了 `NProgress` 这种全局进度条协议：
 
 ```ts
-promise(request.get("/application"), NProgress);
+promise(request.get('/application'), NProgress);
 ```
 
 也就是说，这个封装支持两种 loading 场景：
@@ -120,19 +120,74 @@ src/request/method/utils.ts   文件名解析、blob 下载等内部工具
 `request/index.ts` 是注册出口，它显式导出各个 method 文件：
 
 ```ts
-export * from "./method/get";
-export * from "./method/post";
-export * from "./method/put";
-export * from "./method/delete";
+export * from './method/get';
+export * from './method/post';
+export * from './method/put';
+export * from './method/delete';
 ```
 
 这样业务层仍然可以从一个入口导入：
 
 ```ts
-import { get, post } from "@/request";
+import { get, post } from '@/request';
 ```
 
 文件拆细以后，调用方式不变，但源码阅读路线更清晰。
+
+## 为什么共享类型不要用超长相对路径
+
+下面这种导入能工作，但工程含义不好：
+
+```ts
+import type { LoginRequest } from '../../../../../packages/types/login.type';
+```
+
+它暴露的是“当前文件距离 packages 有几层目录”，而不是“我依赖共享类型”。一旦文件移动目录，导入路径就会跟着碎掉。
+
+现在用 `tsconfig.app.json` 给共享类型加了路径别名：
+
+```json
+"paths": {
+	"@/*": ["./src/*"],
+	"@maxkb/types/*": ["../../packages/types/*"]
+}
+```
+
+业务代码就可以写成：
+
+```ts
+import type { LoginRequest } from '@maxkb/types/login.type';
+```
+
+这背后的工程思想是：跨模块依赖应该通过稳定边界表达，而不是通过文件系统相对位置表达。短期用 TS paths 成本最低；如果后续 `packages/types` 变成独立发布、被前后端共同大量依赖，再升级成真正的 workspace package 会更合适。
+
+## 登录逻辑为什么要拆成 API 编排和页面副作用
+
+旧 Vue 登录函数里同时做了很多事：
+
+- 表单校验
+- 判断 LDAP 还是本地登录
+- RSA 加密
+- 调用登录接口
+- 写入 `workspace_id`
+- 切换语言
+- 路由跳转
+- 登录失败后刷新验证码
+
+迁移到 React Query 后，不建议把这些全部塞进一个组件方法里。更好的边界是：
+
+```text
+api/user/login.ts       负责登录请求编排
+views/login/index.tsx   负责表单、跳转、验证码刷新等页面副作用
+```
+
+`loginApi` 适合作为 `useMutation` 的 `mutationFn`。它处理“应该调用哪个接口、提交什么数据”：
+
+- `loginMode === "LDAP"` 时调用 `/ldap/login`。
+- 普通登录时调用 `/user/login`。
+- 如果后续传入 `rsaKey` 和 `encrypt` 函数，就先生成 `encryptedData` 再提交。
+
+页面的 `onSuccess` / `onError` 更适合处理“用户体验相关副作用”，比如跳转首页、保存 `workspace_id`、失败后刷新验证码。这样做的好处是 API 层可以被测试和复用，页面层也不会被网络细节污染。
 
 ## 源码阅读路线
 
@@ -143,5 +198,6 @@ import { get, post } from "@/request";
 5. `src/request/method/get.ts`：看最简单的 GET 包装和 GET 文件导出。
 6. `src/request/method/post.ts`：看 POST、流式 POST 和 POST 文件导出。
 7. `src/request/method/utils.ts`：看文件下载为什么需要解析响应头和处理 JSON 错误 blob。
-8. `src/router/guard.ts`：看路由 loader 如何处理进入页面前的登录校验。
-9. `src/api/application.ts`：后续业务接口应该调用 request method，而不是页面直接调用 axios。
+8. `src/api/user/login.ts`：看登录请求如何从旧 Vue store action 迁移成 React Query 可调用的 API 函数。
+9. `src/router/guard.ts`：看路由 loader 如何处理进入页面前的登录校验。
+10. `src/api/application.ts`：后续业务接口应该调用 request method，而不是页面直接调用 axios。

@@ -1,16 +1,16 @@
-import { message } from "antd";
-import axios, { AxiosHeaders, type InternalAxiosRequestConfig } from "axios";
-import { router } from "@/router";
-export { promise } from "./promise";
-export * from "./method/get";
-export * from "./method/post";
-export * from "./method/put";
-export * from "./method/delete";
-export * from "./method/download";
-export * from "./method/socket";
+import { message } from 'antd';
+import axios, { AxiosHeaders, type InternalAxiosRequestConfig } from 'axios';
+import { router } from '@/router';
+export { promise, type RequestLoading } from './promise';
+export * from './method/get';
+export * from './method/post';
+export * from './method/put';
+export * from './method/delete';
+export * from './method/download';
+export * from './method/socket';
 
 const axiosConfig = {
-	baseURL: (window.MaxKB?.prefix ? window.MaxKB?.prefix : "/admin") + "/api",
+	baseURL: (window.MaxKB?.prefix ? window.MaxKB?.prefix : '/admin') + '/api',
 	withCredentials: false,
 	timeout: 1800000, // 30分钟 timeout
 	headers: {},
@@ -24,7 +24,7 @@ instance.interceptors.request.use(
 		if (config.headers === undefined) {
 			config.headers = new AxiosHeaders();
 		}
-		if (config.url && config.url.startsWith("http")) {
+		if (config.url && config.url.startsWith('http')) {
 			return config;
 		}
 
@@ -34,11 +34,11 @@ instance.interceptors.request.use(
 		// const token = login.getToken()
 		// const language = user.getLanguage()
 
-		const token = "";
-		const language = "zh-CN";
-		config.headers["Accept-Language"] = `${language}`;
+		const token = '';
+		const language = 'zh-CN';
+		config.headers['Accept-Language'] = `${language}`;
 		if (token) {
-			config.headers["AUTHORIZATION"] = `Bearer ${token}`;
+			config.headers['AUTHORIZATION'] = `Bearer ${token}`;
 		}
 		return config;
 	},
@@ -52,12 +52,12 @@ instance.interceptors.response.use(
 	(response: any) => {
 		if (response.data) {
 			if (response.data.code !== 200 && !(response.data instanceof Blob)) {
-				if (response.config.url.includes("/application/authentication")) {
+				if (response.config.url.includes('/application/authentication')) {
 					return Promise.reject(response.data);
 				}
 				if (
-					!response.config.url.includes("/valid") &&
-					!response.config.url.includes("/tool/debug")
+					!response.config.url.includes('/valid') &&
+					!response.config.url.includes('/tool/debug')
 				) {
 					message.error(response.data.message);
 					return Promise.reject(response.data);
@@ -67,29 +67,29 @@ instance.interceptors.response.use(
 		return response;
 	},
 	(err: any) => {
-		if (err.code === "ECONNABORTED") {
+		if (err.code === 'ECONNABORTED') {
 			message.error(err.message);
 			console.error(err);
 		}
 		if (err.response?.status === 404) {
-			if (!err.response.config.url.includes("/application/authentication")) {
-				router.navigate("/404");
+			if (!err.response.config.url.includes('/application/authentication')) {
+				router.navigate('/404');
 			}
 		}
 		if (err.response?.status === 401) {
 			if (
-				!err.response.config.url.includes("chat/open") &&
-				!err.response.config.url.includes("application/profile")
+				!err.response.config.url.includes('chat/open') &&
+				!err.response.config.url.includes('application/profile')
 			) {
-				router.navigate("/login");
+				router.navigate('/login');
 			}
 		}
 
-		if (err.response?.status === 403 && !err.response.config.url.includes("chat/open")) {
+		if (err.response?.status === 403 && !err.response.config.url.includes('chat/open')) {
 			message.error(
 				err.response.data && err.response.data.message
 					? err.response.data.message
-					: "No permission to access",
+					: 'No permission to access',
 			);
 		}
 		return Promise.reject(err);
