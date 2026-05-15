@@ -17,6 +17,10 @@
 					chatPrefix: "/chat",
 				};
 			})();
+
+			if (location.pathname === "/") {
+				location.replace("/admin/");
+			}
 		</script>
 	</head>
 
