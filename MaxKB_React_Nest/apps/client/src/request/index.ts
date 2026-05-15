@@ -1,6 +1,7 @@
 import { message } from 'antd';
 import axios, { AxiosHeaders, type InternalAxiosRequestConfig } from 'axios';
 import { router } from '@/router';
+import { useLoginStore } from '@/stores/login';
 export { promise, type RequestLoading } from './promise';
 export * from './method/get';
 export * from './method/post';
@@ -28,13 +29,11 @@ instance.interceptors.request.use(
 			return config;
 		}
 
-		// TODO: 后续 store 优化
+		const token = useLoginStore.getState().getToken();
 
-		// const { user, login } = useStore()
-		// const token = login.getToken()
+		// TODO: 后续 store 优化
 		// const language = user.getLanguage()
 
-		const token = '';
 		const language = 'zh-CN';
 		config.headers['Accept-Language'] = `${language}`;
 		if (token) {

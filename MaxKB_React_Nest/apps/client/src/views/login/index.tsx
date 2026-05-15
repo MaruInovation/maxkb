@@ -1,41 +1,47 @@
 import { Button, Form, Input } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { loginApi } from '@/api/user/login';
-
-type FieldType = {
-	username: string;
-	password?: string;
-	captcha?: string;
-};
+import { useLoginStore } from '@/stores/login';
+import type { LoginRequest } from '@maxkb/types/login.type';
 
 export default function Login() {
+	const asyncLogin = useLoginStore((state) => state.asyncLogin);
+
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<FieldType>({
+	} = useForm<LoginRequest>({
 		defaultValues: {
 			username: 'qiang11.li',
 			password: 'MaxKB@123...',
-			captcha: '',
 		},
 	});
 
 	const loginMutation = useMutation({
 		// TODO: 这是暂时的方案，先传明文
-		mutationFn: (values: FieldType) => loginApi(values),
+		mutationFn: loginHandle,
 		onSuccess: () => {
 			console.log('请求成功');
-			localStorage.setItem('workspace_id', 'default');
-
-			// navigate("/application");
+			// locale.value = localStorage.getItem('MaxKB-locale') || getBrowserLang() || 'en-US'
+			// router.push({ name: 'home' })
+		},
+		onError: (error) => {
+			console.log('请求失败', error);
+		},
+		onSettled: () => {
+			console.log('请求结束');
 		},
 	});
 
 	const onSubmit = handleSubmit((values) => {
 		loginMutation.mutate(values);
 	});
+
+	async function loginHandle(value: LoginRequest) {
+		// TODO: loginMode
+		return asyncLogin(value);
+	}
 
 	return (
 		<div>
